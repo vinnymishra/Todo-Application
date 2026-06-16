@@ -90,7 +90,7 @@ src
 
 # Features Implemented
 
-1. # Add Task
+1. Add Tasks
 Users can enter a task title and click the Add button.
 ```
 @PostMapping
@@ -98,4 +98,4 @@ public String getTasks(@RequestParam String title)
 ```
 
 
-2. # View Tasks
+2. View Tasks
