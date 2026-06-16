@@ -96,7 +96,7 @@ Users can enter a task title and click the Add button.
 @PostMapping
 public String getTasks(@RequestParam String title)
 ```
-#TaskController.java
+**TaskController.java**
 ```
 package com.app.todoapp.controller;
 
@@ -168,7 +168,7 @@ taskRepository.findAll()
 
 The tasks are loaded through the service layer and passed to the frontend.
 
-# TaskService.java
+**TaskService.java**
 ```
 package com.app.todoapp.services;
 
