@@ -211,4 +211,109 @@ public class TaskService {
 ```
 
 
+# Toggle Task Status
+
+Each task has a Toggle button.
+When clicked:
+- Incomplete → Complete
+- Complete → Incomplete
+
+```
+task.setCompleted(!task.isCompleted());
+```
+The updated task is then saved back to the database.
+
+
+# Delete Task
+
+Users can permanently remove tasks using the Delete button.
+
+```
+taskRepository.deleteById(id);
+```
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+# Architecture
+```
+User
+ ↓
+Thymeleaf View
+ ↓
+Controller
+ ↓
+Service
+ ↓
+Repository
+ ↓
+MySQL Database
+```
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+# Controller
+
+Handles incoming requests and user actions.
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+# Service
+
+Contains business logic for creating, deleting, and toggling tasks.
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+# Repository
+
+Communicates with the database using Spring Data JPA.
+
+**TaskRepository.java**
+```
+package com.app.todoapp.repository;
+
+import com.app.todoapp.models.Task;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+
+public interface TaskRepository extends JpaRepository<Task, Long> {
+}
+```
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+# Database Configuration
+
+The application uses MySQL as the backend database.
+
+Configuration is stored in:
+```
+spring.datasource.url=jdbc:mysql://localhost:3306/todo-app
+spring.jpa.hibernate.ddl-auto=update
+```
+
+**ApplicationProperties.java**
+```
+spring.application.name=todoapp
+
+spring.datasource.url=jdbc:mysql://localhost:3306/todo-app
+spring.datasource.username=root
+spring.datasource.password=vinayakmishra_777
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect
+```
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 
