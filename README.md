@@ -54,3 +54,5 @@ Task 3                [Toggle] [Delete]
 
 # Build Tool
 - Maven
+
+The project uses Spring Boot starters for Web MVC, Thymeleaf, and JPA along with the MySQL JDBC driver.
