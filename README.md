@@ -56,3 +56,46 @@ Task 3                [Toggle] [Delete]
 - Maven
 
 The project uses Spring Boot starters for Web MVC, Thymeleaf, and JPA along with the MySQL JDBC driver.
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+# Project Structure
+```
+src
+│
+├── controller
+│   └── TaskController
+│
+├── services
+│   └── TaskService
+│
+├── repository
+│   └── TaskRepository
+│
+├── models
+│   └── Task
+│
+├── templates
+│   └── tasks.html
+│
+└── resources
+    └── application.properties
+```
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+# Features Implemented
+
+1. # Add Task
+Users can enter a task title and click the Add button.
+```
+@PostMapping
+public String getTasks(@RequestParam String title)
+```
+
+
+2. # View Tasks
