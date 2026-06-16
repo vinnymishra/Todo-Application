@@ -25,8 +25,8 @@ The application follows the MVC (Model-View-Controller) architecture and uses Sp
 # Application Preview
 
 Todo Application
-
-```[ Add a new task... ]  [ Add ]
+```
+[ Add a new task... ]  [ Add ]
 
 Task 1                [Toggle] [Delete]
 Task 2                [Toggle] [Delete]
