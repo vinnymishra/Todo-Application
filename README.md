@@ -90,12 +90,125 @@ src
 
 # Features Implemented
 
-1. Add Tasks
+# Add Tasks
 Users can enter a task title and click the Add button.
 ```
 @PostMapping
 public String getTasks(@RequestParam String title)
 ```
+#TaskController.java
+```
+package com.app.todoapp.controller;
+
+import com.app.todoapp.models.Task;
+import com.app.todoapp.services.TaskService;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
+
+@Controller
+//@RequestMapping("/tasks")
+public class TaskController {
+
+    private final TaskService taskService;
+
+    public TaskController(TaskService taskService) {
+        this.taskService = taskService;
+    }
+
+    @GetMapping
+    public String getTasks(Model model) {
+        System.out.println("Controller Hit");
+        List<Task> tasks = taskService.getAllTasks();
+        System.out.println(tasks);
+        model.addAttribute("tasks", tasks);
+        return "tasks";
+
+    }
+
+    @PostMapping
+    public String getTasks(@RequestParam String title) {
+        System.out.println("Controller Hit");
+        taskService.createTask(title);
+        return "redirect:/";
+    }
+
+    @GetMapping("/{id}/delete")
+    public String deleteTask(@PathVariable Long id) {
+        System.out.println("Controller Hit");
+        taskService.deleteTask(id);
+        return "redirect:/";
+    }
+
+    @GetMapping("/{id}/toggle")
+    public String toggleTask(@PathVariable Long id) {
+        System.out.println("Controller Hit");
+        taskService.toggleTask(id);
+        return "redirect:/";
+    }
 
 
-2. View Tasks
+
+
+}
+```
+
+
+# View Tasks
+All tasks are fetched from the database and displayed dynamically using Thymeleaf.
+
+```
+taskRepository.findAll()
+```
+
+The tasks are loaded through the service layer and passed to the frontend.
+
+# TaskService.java
+```
+package com.app.todoapp.services;
+
+import com.app.todoapp.models.Task;
+import com.app.todoapp.repository.TaskRepository;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class TaskService {
+
+    private final TaskRepository taskRepository;
+
+    public TaskService(TaskRepository taskRepository) {
+        this.taskRepository = taskRepository;
+    }
+
+    public List<Task> getAllTasks(){
+        return taskRepository.findAll();
+    }
+    public void createTask(String title){
+      Task task = new Task();
+      task.setTitle(title);
+      task.setCompleted(false);
+      taskRepository.save(task);
+    }
+
+    public void deleteTask(Long id) {
+        taskRepository.deleteById(id);
+    }
+
+    public void toggleTask(Long id) {
+        Task task = taskRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid Task id"));
+        task.setCompleted(!task.isCompleted());
+        taskRepository.save(task);
+    }
+}
+```
+
+
+
