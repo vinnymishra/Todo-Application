@@ -307,8 +307,7 @@ spring.jpa.hibernate.ddl-auto=update
 spring.application.name=todoapp
 
 spring.datasource.url=jdbc:mysql://localhost:3306/todo-app
-spring.datasource.username=root
-spring.datasource.password=vinayakmishra_777
+spring.datasource.password=YOUR_PASSWORD
 spring.jpa.hibernate.ddl-auto=update
 spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect
 ```
